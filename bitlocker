@@ -1,0 +1,16 @@
+#Region ;**** Directives created by AutoIt3Wrapper_GUI ****
+#AutoIt3Wrapper_UseX64=y   ; I added this just to allow the script run properly on my 64 bits machine
+#EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
+
+#include <Array.au3>
+
+$strComputer = "."
+$iPid = Run(@ComSpec & ' /c manage-bde -status -cn ' & $strComputer, @SystemDir, @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+
+Local $sOutput = ""
+While 1
+    $sOutput &= StdoutRead($iPid)
+    If @error Then
+        ExitLoop
+    EndIf
+WEnd
